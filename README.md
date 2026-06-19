@@ -14,8 +14,8 @@ A full-stack web application designed for simple project and task management. It
 
 ### 1. Clone the repository
 ```bash
-git clone <your-repository-url>
-cd <your-repository-name>
+git clone https://github.com/lasya2624/o2h---Mini-project-Mangement-Portal.git
+cd o2h---Mini-project-Management-Portal
 ```
 
 ### 2. Database Setup
