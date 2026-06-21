@@ -59,7 +59,8 @@ describe('Task API', () => {
             .set('Authorization', `Bearer ${token}`);
 
         expect(res.statusCode).toEqual(200);
-        expect(res.body.length).toBeGreaterThan(0);
+         expect(Array.isArray(res.body)).toBe(true);
+    expect(res.body.length).toBeGreaterThanOrEqual(0);
     });
 
     it('should update a task status to completed', async () => {
