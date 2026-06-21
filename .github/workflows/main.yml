@@ -43,10 +43,24 @@ jobs:
 
   backend:
     name: Backend Test
-    runs-on: ${{matrix.os}}
-    strategy:
-      matrix:
-        os: [ubuntu-latest,windows-latest,macOS-latest]
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8
+
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.DB_NAME }}
+
+        ports:
+           - 3306:3306
+
+        options: >-
+          --health-cmd="mysqladmin ping -p${{ secrets.DB_PASSWORD }}"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
 
     defaults:
       run:
@@ -64,5 +78,17 @@ jobs:
       - name: Install Backend Dependencies
         run: npm install
 
+      - name: Create Database Schema
+        run: |
+          mysql -h 127.0.0.1 -u root -p${{ secrets.DB_PASSWORD }} ${{ secrets.DB_NAME }} < schema.sql
+
       - name: Run Jest Tests
+        env:
+          DB_HOST: ${{ secrets.DB_HOST}}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DB_USER: ${{ secrets.DB_USER}}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_NAME: ${{ secrets.DB_NAME }}
         run: npm test
+
+      

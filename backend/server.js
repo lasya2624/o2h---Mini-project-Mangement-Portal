@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT ;
 
 // Middleware for JWT Verification
 const authenticateToken = (req, res, next) => {
