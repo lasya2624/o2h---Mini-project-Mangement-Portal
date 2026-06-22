@@ -61,8 +61,11 @@ app.post('/api/auth/login', async (req, res) => {
         const token = jwt.sign({ id: user.id, username: user.username }, JWT_SECRET, { expiresIn: '24h' });
         res.json({ token, username: user.username });
     } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+    console.error("GET TASKS ERROR:", err);
+    res.status(500).json({
+        error: err.message
+    });
+}
 });
 
 // Task Routes
@@ -85,8 +88,11 @@ app.get('/api/tasks/stats', authenticateToken, async (req, res) => {
             pending: parseInt(row.pending) || 0
         });
     } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+    console.error("STATS ERROR:", err);
+    res.status(500).json({
+        error: err.message
+    });
+}
 });
 
 app.get('/api/tasks', authenticateToken, async (req, res) => {
