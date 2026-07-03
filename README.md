@@ -1,6 +1,6 @@
 # Mini Project Management Portal
 
-A full-stack web application designed for simple project and task management. It allows users to create tasks, mark them as completed, delete them, and filter/search through their dashboard. The app features secure authentication, responsive design, dark mode, and a robust SQL database backend.
+A full-stack web application designed for simple project and task management. It allows users to create tasks, mark them as completed, delete them, and filter/search through their dashboard. The app features secure authentication, responsive design, dark mode, and a robust SQL database backend.Implemented JWT Authentication.
 
 ## Tech Stack
 *   **Frontend**: React (Vite), Tailwind CSS v4, Lucide React (Icons)
